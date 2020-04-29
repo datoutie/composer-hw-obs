@@ -80,24 +80,18 @@ class Api{
         
         $msg=array('result'=>'false','data'=>array());
         $response=json_decode($response,true);
-        if(isset($response['error_msg']))
+        if(isset($response['credential']))
         {
-            $msg['data']=$response;
-            return $msg;
+            $msg['result']=true;
+            $msg['data']=$response['credential'];
         }
         else
         {
-            if(isset($response['credential']))
-            {
-                $msg['result']=true;
-                $msg['data']=$response;
-                return $msg;
-            }
-            else
-            {
-                return null;
-            }
+            //error_msg
+            //error
+            $msg['data']=$response;
         }
+        return $msg;
         
     }
     public function GetNotify()
@@ -111,6 +105,7 @@ class Api{
         }
         else
         {
+            $data['message']=json_decode($data['message'],true);
             $result['result']=true;
             $result['data']=$data['message'];
         }
