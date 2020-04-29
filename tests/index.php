@@ -28,12 +28,33 @@ try {
     {
         $notifydata=$notify['data'];
         echo $notifydata['transcode_info'];
-        //['asset_id'];
-        //['title']
-        //['status']=SUCCEED
-        //['output']=(array)
-        //[0]['quality']=FLUENT
-        //[0]['url']=''
+        // {
+        //     "event_type": "transcodeComplete",
+        //     "transcode_info": {
+        //         "title": "14_1588134652.mp4",
+        //         "status": "SUCCEED",
+        //         "template_group_name": "new",
+        //         "output": [{
+        //             "play_type": "MP4",
+        //             "url": "https://xxxx.com/655c39dabf63479aa544fc3c38a56cce.mp4",
+        //             "encrypted": 0,
+        //             "quality": "FLUENT",
+        //             "meta_data": {
+        //                 "play_type": 0,
+        //                 "codec": "H.264",
+        //                 "duration": 93,
+        //                 "video_size": 5485568,
+        //                 "width": 480,
+        //                 "hight": 270,
+        //                 "bit_rate": 399,
+        //                 "frame_rate": 24,
+        //                 "quality": "FLUENT",
+        //                 "audio_channels": 0
+        //             }
+        //         }],
+        //         "asset_id": "ee12df9b5d3a1XXXX"
+        //     }
+        // }
 
     }
 
