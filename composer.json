@@ -3,7 +3,7 @@
     "description": "obs-vod",
     "type": "library",
     "license": "MIT",
-    "minimum-stability": "dev",
+    "version":"1.0",
     "require": {
         "php": ">=5.6"
     },
