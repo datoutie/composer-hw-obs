@@ -34,7 +34,7 @@ class Base{
             }
        
             $requestBody =  $this->RequestBodyForGetToken();
-            $_url = "https://iam.".$this->config['regionName'].".myhuaweicloud.com/v3/auth/tokens" ;
+            $_url = "https://iam.myhuaweicloud.com/v3/auth/tokens" ;
             $headers = array(
                 "Content-Type:application/json"
             );
@@ -85,9 +85,6 @@ class Base{
 
                 ),
                 "scope" => array(
-                    "project" => array(
-                        "name" =>$this->config['regionName']
-                    ),
                     "domain"=>array(
                         "name" =>$this->config['domainName']
                     )

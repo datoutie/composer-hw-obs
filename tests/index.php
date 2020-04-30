@@ -5,11 +5,13 @@ use \SDK\Contracts\Base;
 
 try {
     //第一步
-    $Base=new Base(array('username'=>'','password'=>'','domainName'=>'','regionName'=>'cn-north-4'));
+    //https://developer.huaweicloud.com/endpoint?OBS
+    //cn-east-2上海二
+    $Base=new Base(array('username'=>'','password'=>'','domainName'=>'','regionName'=>'cn-east-2'));
     $token=$Base->GetToken();//缓存一下
     //第二步
     $Api=new Api();
-    $aksk=$Api->GetSecuritytokens($token,3600,'cn-north-4');
+    $aksk=$Api->GetSecuritytokens($token,900);//最小900s
     if($aksk['result'])
     {
         print_r($aksk['data']);

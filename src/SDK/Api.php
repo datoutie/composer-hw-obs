@@ -3,15 +3,15 @@ namespace SDK;
 use \SDK\Contracts\Base;
 
 class Api{
-    public function GetSecuritytokens($hw_token,$seconds,$regionName)
+    public function GetSecuritytokens($hw_token,$seconds)
     {
         $asak=array();
         $timeout=3;
         $timenow=0;
         while ($timenow<$timeout) {
             $timenow++;
-            $requestBody =  $this->RequestBodyForGetSecuritytokens($hw_token,$seconds);
-            $_url = "https://iam.".$regionName.".myhuaweicloud.com/v3.0/OS-CREDENTIAL/securitytokens" ;
+            $requestBody =  $this->RequestBodyForGetSecuritytokens($seconds);
+            $_url = "https://iam.myhuaweicloud.com/v3.0/OS-CREDENTIAL/securitytokens" ;
             $headers = array(
                 "Content-Type:application/json;charset=utf8",
                 "X-Auth-Token:".$hw_token
@@ -45,28 +45,26 @@ class Api{
         }
         return $asak;
     }
-    public function RequestBodyForGetSecuritytokens($hw_token,$seconds)
+    public function RequestBodyForGetSecuritytokens($seconds)
     {
         $param = array(
             "auth" => array(
                 "identity" => array(
                     "token" => array(
-                        "id"=>$hw_token,
                         "duration-seconds"=>$seconds
                     ),
-                    "methods" => array("token")
-
-                ),
-                "policy" => array(
-                    "Version"=>"1.1",
-                    "Statement"=>array(
-                        array(
-                            "Effect"=>"Allow",
-                            "Action"=>array(
-                                "obs:bucket:ListBucketMultipartUploads",
-                                "obs:object:PutObject",
-                                "obs:object:AbortMultipartUpload",
-                                "obs:object:ListMultipartUploadParts"
+                    "methods" => array("token"),
+                    "policy" => array(
+                        "Version"=>"1.1",
+                        "Statement"=>array(
+                            array(
+                                "Effect"=>"Allow",
+                                "Action"=>array(
+                                    "obs:bucket:ListBucketMultipartUploads",
+                                    "obs:object:PutObject",
+                                    "obs:object:AbortMultipartUpload",
+                                    "obs:object:ListMultipartUploadParts"
+                                )
                             )
                         )
                     )
