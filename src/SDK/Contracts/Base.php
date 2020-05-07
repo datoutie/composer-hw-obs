@@ -87,6 +87,9 @@ class Base{
                 "scope" => array(
                     "domain"=>array(
                         "name" =>$this->config['domainName']
+                    ),
+                    "project"=>array(
+                        "name"=>$this->config['regionName']
                     )
                 )
             )

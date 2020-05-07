@@ -4,14 +4,15 @@ use \SDK\Api;
 use \SDK\Contracts\Base;
 
 try {
-    //第一步
+//第一步
     //https://developer.huaweicloud.com/endpoint?OBS
     //cn-east-2上海二
     $Base=new Base(array('username'=>'','password'=>'','domainName'=>'','regionName'=>'cn-east-2'));
     $token=$Base->GetToken();//缓存一下
-    //第二步
+//第二步
     $Api=new Api();
-    $aksk=$Api->GetSecuritytokens($token,900);//最小900s
+   
+    $aksk=$Api->GetSecuritytokens($token,900);//最小900s 86400
     if($aksk['result'])
     {
         print_r($aksk['data']);
@@ -23,13 +24,36 @@ try {
     {
         //error 重新GetToken
     }
-
-//第三步
-    $notify=$Api->GetNotify();//获取转码后通知
-    if($notify['result'])
+//获取AssetId
+    $ass=$Api->GetAssetId($token,$project_id,'cn-east-2',$title,$video_name,$video_type,$workflow_name);
+    if($ass['result'])
     {
-        $notifydata=$notify['data'];
-        echo $notifydata['transcode_info'];
+        print_r($ass['data']);
+    }
+//     Array
+// (
+//     [asset_id] => XXXX
+//     [target] => Array
+//         (
+//             [bucket] => vod-bucket-XX-cn-east-2
+//             [location] => cn-east-2
+//             [object] => XX/XX/XX.mp4
+//         )
+
+// )
+
+//确认上传
+    $ok=$Api->GetAssetUploaded($token,'cn-east-2',$asset_id,$project_id);
+    if($ok['result'])
+    {
+        print_r($ok['data']);
+    }
+//第三步
+    // $notify=$Api->GetNotify();//获取转码后通知
+    // if($notify['result'])
+    // {
+    //     $notifydata=$notify['data'];
+    //     echo $notifydata['transcode_info'];
         // {
         //     "event_type": "transcodeComplete",
         //     "transcode_info": {
@@ -58,7 +82,7 @@ try {
         //     }
         // }
 
-    }
+    //}
 
 } catch (\Exception $th) {
    echo $th->getMessage();
